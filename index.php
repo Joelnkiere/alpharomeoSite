@@ -61,7 +61,7 @@ if (isset ($_POST['envoyer'])) {
 
 
 }
-$con->close();
+//$con->close();
 
 ?>
 
@@ -483,7 +483,7 @@ Notre équipe de marketing digital est là pour vous aider à développer des st
 
                             <div class="blog-item bg-light rounded overflow-hidden">
                                 <div class="blog-img position-relative overflow-hidden">
-                                    <img class="img-fluid" src="admin/images/blog/<?php echo $row['img']; ?>" alt="">
+                                    <img class="img-fluid" src="administrate/admin/images/blog/<?php echo $row['img']; ?>" alt="">
                                     <a class="position-absolute top-0 start-0 bg-primary text-white rounded-end mt-5 py-2 px-4" href="#"><?php echo $row['category']; ?></a>
                                 </div>
                                 <div class="p-4">

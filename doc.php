@@ -2,20 +2,25 @@
 <?php
 
     error_reporting(0);
-    include "administrate/admin/conn.php";
+   include "administrate/admin/conn.php";
    
   
-    //fetch blogs 
+if (isset($_POST['recherche'])) {
+        $keyword=$_POST['keyword'];
+    }    //fetch blogs 
     //fetch blog
-    $event = mysqli_query($con,"SELECT * FROM evenement ORDER BY id DESC");
+    $recherche=mysqli_query($con,"SELECT * FROM blog WHERE title LIKE '%$keyword%' or descrip LIKE'%$keyword%' or auteur LIKE'%$keyword%' order by title ");
+
+    $blog = mysqli_query($con,"SELECT * FROM blog ORDER BY id DESC");
 
     //fetch category
 
-    $cat = mysqli_query($con,"SELECT * FROM categorie ORDER BY id_cat DESC");
+    $cat = mysqli_query($con,"SELECT * FROM category ORDER BY id DESC");
 
 
     //fetch recent post
-    $recent = mysqli_query($con,"SELECT * FROM evenement ORDER BY id DESC LIMIT 5");
+    $recent = mysqli_query($con,"SELECT * FROM blog ORDER BY id DESC LIMIT 5");
+
     
      //fetch settings
     $settings = mysqli_query($con,"SELECT * FROM settings");
@@ -85,7 +90,7 @@
                     <a href="index.php" class="nav-item nav-link">Accueil</a>
                     <a href="about.php" class="nav-item nav-link">A propos</a>
                     <a href="service.php" class="nav-item nav-link">Services</a>
-                    <a href="blog.php" class="nav-item nav-link">Publication</a>
+                    <a href="#" class="nav-item nav-link active">Publication</a>
                    
                     <!-- <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Publication</a>
@@ -95,14 +100,14 @@
                         </div>
                     </div> -->
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">Pages</a>
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                         <div class="dropdown-menu m-0">
                            
                             <!-- <a href="feature.php" class="dropdown-item">Our features</a> -->
                             
                             <!-- <a href="testimonial.html" class="dropdown-item">Testimonial</a> -->
                             <a href="quote.php" class="dropdown-item">Commander un service</a>
-                            <a href="#" class="dropdown-item active">Evennement</a>
+                            <a href="evennement.php" class="dropdown-item">Evennement</a>
                         </div>
                     </div>
                     <a href="contact.php" class="nav-item nav-link">Contact</a>
@@ -115,10 +120,10 @@
         <div class="container-fluid bg-primary py-5 bg-header" style="margin-bottom: 90px;">
             <div class="row py-5">
                 <div class="col-12 pt-lg-5 mt-lg-5 text-center">
-                    <h1 class="display-4 text-white animated zoomIn">Nos événements</h1>
+                    <h1 class="display-4 text-white animated zoomIn">Nos publication</h1>
                     <a href="index.php" class="h5 text-white">Accueil</a>
                     <i class="far fa-circle text-white px-2"></i>
-                    <a href="#" class="h5 text-white">évenement</a>
+                    <a href="#" class="h5 text-white">Publication</a>
                 </div>
             </div>
         </div>
@@ -133,12 +138,14 @@
                 <div class="modal-header border-0">
                     <button type="button" class="btn bg-white btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body d-flex align-items-center justify-content-center">
+                <form>
+                    <div class="modal-body d-flex align-items-center justify-content-center">
                     <div class="input-group" style="max-width: 600px;">
                         <input type="text" class="form-control bg-transparent border-primary p-3" placeholder="Type search keyword">
                         <button class="btn btn-primary px-4"><i class="bi bi-search"></i></button>
                     </div>
                 </div>
+                </form>
             </div>
         </div>
     </div>
@@ -154,38 +161,80 @@
             <div class="row g-5">
                 <!-- Blog list Start -->
 
-                <div class="col-lg-8">
+                <div class="col-lg-4">
                      
                     <div class="row g-4">
 
-                        <?php   
-                        while ($row=mysqli_fetch_array($event)){
+                        <!-- <?php   
+                        while ($row=mysqli_fetch_array($blog)){
                        
                         ?>
                         <div class="col-md-6 wow slideInUp" data-wow-delay="0.1s">
 
                             <div class="blog-item bg-light rounded overflow-hidden">
                                 <div class="blog-img position-relative overflow-hidden">
-                                    <img class="img-fluid" src="administrate/admin/images/evennement/<?php echo $row['img']; ?>" alt="">
-                                    <a class="position-absolute top-0 start-0 bg-primary text-white rounded-end mt-5 py-2 px-4" href="evenement-categorie.php?categorie=<?php echo $row['categorie']; ?>"><?php echo $row['categorie']; ?></a>
+                                    <img class="img-fluid" src="administrate/admin/images/blog/<?php echo $row['img']; ?>" alt="">
+                                    <a class="position-absolute top-0 start-0 bg-primary text-white rounded-end mt-5 py-2 px-4" href="blog-category.php?category=<?php echo $row['category']; ?>"><?php echo $row['category']; ?></a>
                                 </div>
                                 <div class="p-4">
                                     <div class="d-flex mb-3">
                                         <small class="me-3"><i class="far fa-user text-primary me-2"></i><?php echo $row['auteur']?></small>
-                                        <small><i class="far fa-calendar-alt text-primary me-2"></i><?php echo $row['date_event']; ?></small>
+                                        <small><i class="far fa-calendar-alt text-primary me-2"></i><?php echo $row['date']; ?></small>
                                     </div>
-                                    <h4 class="mb-3"><a href="detail-evenement.php?id=<?php echo $row['id']; ?>"><?php echo $row['title']; ?></a></h4>
+                                    <h4 class="mb-3"><a href="detail.php?id=<?php echo $row['id']; ?>"><?php echo $row['title']; ?></a></h4>
                                     <p><?php 
                             $ddesc = $row['descrip']; 
                         echo $dec = substr($ddesc,0,180);
                         ?>...</p>
-                                    <a class="text-uppercase" href="detail-evenement.php?id=<?php echo $row['id']; ?>">Voir plus <i class="bi bi-arrow-right"></i></a>
+                                    <a class="text-uppercase" href="detail.php?id=<?php echo $row['id']; ?>">Voir plus <i class="bi bi-arrow-right"></i></a>
                                 </div>
                             </div>
                         </div>
 
                      
-                        <?php  } ?>
+                        <?php  }
+                         ?> -->
+
+
+                         <?php   
+                        if (mysqli_num_rows($recherche)>0) {
+                            while ($row=mysqli_fetch_array($recherche)){
+                       
+                        ?>
+                        <div class="col-md-6 wow slideInUp" data-wow-delay="0.1s">
+
+                            <div class="blog-item bg-light rounded overflow-hidden">
+                                <div class="blog-img position-relative overflow-hidden">
+                                    <img class="img-fluid" src="administrate/admin/images/blog/<?php echo $row['img']; ?>" alt="">
+                                    <a class="position-absolute top-0 start-0 bg-primary text-white rounded-end mt-5 py-2 px-4" href="blog-category.php?category=<?php echo $row['category']; ?>"><?php echo $row['category']; ?></a>
+                                </div>
+                                <div class="p-4">
+                                    <div class="d-flex mb-3">
+                                        <small class="me-3"><i class="far fa-user text-primary me-2"></i><?php echo $row['auteur']?></small>
+                                        <small><i class="far fa-calendar-alt text-primary me-2"></i><?php echo $row['date']; ?></small>
+                                    </div>
+                                    <h4 class="mb-3"><a href="detail.php?id=<?php echo $row['id']; ?>"><?php echo $row['title']; ?></a></h4>
+                                    <p><?php 
+                            $ddesc = $row['descrip']; 
+                        echo $dec = substr($ddesc,0,180);
+                        ?>...</p>
+                                    <a class="text-uppercase" href="detail.php?id=<?php echo $row['id']; ?>">Voir plus <i class="bi bi-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                     
+                        <?php  }
+                        }else{
+                            ?>
+                            
+                            <div class="section-title section-title-lg position-relative pb-3 mb-4">
+                            <h3 class="mb-0">Aucun Resulta trouvé!!</h3>
+                        </div>
+                            <?php
+                        }
+                         ?>
+                        
                     </div>
                     
                 </div>
@@ -196,10 +245,12 @@
                 <div class="col-lg-4">
                     <!-- Search Form Start -->
                     <div class="mb-5 wow slideInUp" data-wow-delay="0.1s">
-                        <div class="input-group">
-                            <input type="text" class="form-control p-3" placeholder="Rechercher">
-                            <button class="btn btn-primary px-4"><i class="bi bi-search"></i></button>
+                        <form action="blog.php" method="post">
+                            <div class="input-group">
+                            <input type="text" class="form-control p-3" placeholder="Rechercher" name="keyword" value="<?php echo empty($_POST['keyword']) ? '':$_POST['keyword']?>"/>
+                            <button class="btn btn-primary px-4" name="recherche"><i class="bi bi-search"></i></button>
                         </div>
+                        </form>
                     </div>
                     <!-- Search Form End -->
     
@@ -211,11 +262,11 @@
                         <div class="link-animated d-flex flex-column justify-content-start">
                             <?php
                                 while ($row=mysqli_fetch_array($cat)) {
-                                     $counter  = mysqli_query($con,"SELECT * FROM evenement WHERE categorie='".$row['libelle']."'");
+                                     $counter  = mysqli_query($con,"SELECT * FROM blog WHERE category='".$row['cat_name']."'");
                                         $counti = mysqli_num_rows($counter);
                                 
                             ?>
-                            <a class="h5 fw-semi-bold bg-light rounded py-2 px-3 mb-2"  href="evenement-categorie.php?categorie=<?php echo $row['libelle']; ?>"><i class="bi bi-arrow-right me-2"></i><?php echo $row['libelle']; ?></a>
+                            <a class="h5 fw-semi-bold bg-light rounded py-2 px-3 mb-2"  href="blog-category.php?category=<?php echo $row['cat_name']; ?>"><i class="bi bi-arrow-right me-2"></i><?php echo $row['cat_name']; ?></a>
                             <!-- <a class="h5 fw-semi-bold bg-light rounded py-2 px-3 mb-2" href="#"><i class="bi bi-arrow-right me-2"></i>Web Development</a>
                             <a class="h5 fw-semi-bold bg-light rounded py-2 px-3 mb-2" href="#"><i class="bi bi-arrow-right me-2"></i>Web Development</a>
                             <a class="h5 fw-semi-bold bg-light rounded py-2 px-3 mb-2" href="#"><i class="bi bi-arrow-right me-2"></i>Keyword Research</a>
@@ -228,7 +279,7 @@
                     <!-- Category End -->
     
                     <!-- Recent Post Start -->
-                    <div class="mb-5 wow slideInUp" data-wow-delay="0.1s">
+                    <div class="mb-10 wow slideInUp" data-wow-delay="0.1s">
                         <div class="section-title section-title-sm position-relative pb-3 mb-4">
                             <h3 class="mb-0">Recents Posts</h3>
                         </div>
@@ -238,8 +289,8 @@
                             
                             ?>
                         <div class="d-flex rounded overflow-hidden mb-3">
-                            <img class="img-fluid" src="administrate/admin/images/evennement/<?php echo $row['img']; ?>" style="width: 100px; height: 100px; object-fit: cover;" alt="">
-                            <a href="detail-evenement.php?id=<?php echo $row['id']; ?>" class="h5 fw-semi-bold d-flex align-items-center bg-light px-3 mb-0"><?php echo $row['title']; ?>
+                            <img class="img-fluid" src="administrate/admin/images/blog/<?php echo $row['img']; ?>" style="width: 100px; height: 100px; object-fit: cover;" alt="">
+                            <a href="detail.php?id=<?php echo $row['id']; ?>" class="h5 fw-semi-bold d-flex align-items-center bg-light px-3 mb-0"><?php echo $row['title']; ?>
                             </a>
                         </div>
                         <?php
@@ -251,14 +302,14 @@
     
                     <!-- Image Start -->
                     <div class="mb-5 wow slideInUp" data-wow-delay="0.1s">
-                        <img src="admin/dist/img/alpharomeo.png" alt="" class="img-fluid rounded">
+                        <img src="administrate/admin/dist/img/alpharomeo.png" alt="" class="img-fluid rounded">
                     </div>
                     <!-- Image End -->
     
                     <!-- Tags Start -->
                     <div class="mb-5 wow slideInUp" data-wow-delay="0.1s">
                         <div class="section-title section-title-sm position-relative pb-3 mb-4">
-                            <h3 class="mb-0">Tag Cloud</h3>
+                            <h3 class="mb-0">Mots Clés</h3>
                         </div>
                         <div class="d-flex flex-wrap m-n1">
                             <a href="" class="btn btn-light m-1">Design</a>

@@ -2,7 +2,7 @@
 <?php
 
     error_reporting(0);
-    include "admin/conn.php";
+    include "administrate/admin/conn.php";
      $category=$_GET['category'];
   
     //fetch blogs 
@@ -28,6 +28,7 @@
 <head>
     <meta charset="utf-8">
     <title>Startup - Alpha-Romeo</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -44,7 +45,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
-    <<!-- link href="css/all.min.css" rel="stylesheet"> -->
+    <!-- link href="css/all.min.css" rel="stylesheet"> -->
 
     <!-- Libraries Stylesheet -->
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
@@ -56,7 +57,6 @@
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
 </head>
-
 <body>
     <!-- Spinner Start -->
     <!-- <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
@@ -163,7 +163,7 @@
 
                             <div class="blog-item bg-light rounded overflow-hidden">
                                 <div class="blog-img position-relative overflow-hidden">
-                                    <img class="img-fluid" src="admin/images/blog/<?php echo $row['img']; ?>" alt="">
+                                    <img class="img-fluid" src="administrate/admin/images/blog/<?php echo $row['img']; ?>" alt="">
                                     <a class="position-absolute top-0 start-0 bg-primary text-white rounded-end mt-5 py-2 px-4" href="#"><?php echo $row['category']; ?></a>
                                 </div>
                                 <div class="p-4">
@@ -235,7 +235,7 @@
                             
                             ?>
                         <div class="d-flex rounded overflow-hidden mb-3">
-                            <img class="img-fluid" src="admin/images/blog/<?php echo $row['img']; ?>" style="width: 100px; height: 100px; object-fit: cover;" alt="">
+                            <img class="img-fluid" src="administrate/admin/images/blog/<?php echo $row['img']; ?>" style="width: 100px; height: 100px; object-fit: cover;" alt="">
                             <a href="detail.php?id=<?php echo $row['id']; ?>" class="h5 fw-semi-bold d-flex align-items-center bg-light px-3 mb-0"><?php echo $row['title']; ?>
                             </a>
                         </div>
@@ -248,7 +248,7 @@
     
                     <!-- Image Start -->
                     <div class="mb-5 wow slideInUp" data-wow-delay="0.1s">
-                        <img src="admin/dist/img/alpharomeo.png" alt="" class="img-fluid rounded">
+                        <img src="administrate/admin/dist/img/alpharomeo.png" alt="" class="img-fluid rounded">
                     </div>
                     <!-- Image End -->
     

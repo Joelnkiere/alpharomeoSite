@@ -1,6 +1,6 @@
 <?php
  error_reporting(0);
-    include "admin/conn.php";
+    include "administrate/admin/conn.php";
  $settings = mysqli_query($con,"SELECT * FROM settings");
     $setting  = mysqli_fetch_array($settings);
 ?>

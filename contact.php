@@ -2,7 +2,7 @@
 <?php
 
     error_reporting(0);
-    include "admin/conn.php";
+    include "administrate/admin/conn.php";
    
      //fetch settings
     $settings = mysqli_query($con,"SELECT * FROM settings");
@@ -52,6 +52,7 @@ $con->close();
 <head>
     <meta charset="utf-8">
     <title>Startup - Alpha-Romeo</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -68,7 +69,7 @@ $con->close();
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
-    <<!-- link href="css/all.min.css" rel="stylesheet"> -->
+    <!-- link href="css/all.min.css" rel="stylesheet"> -->
 
     <!-- Libraries Stylesheet -->
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">

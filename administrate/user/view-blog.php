@@ -2,7 +2,12 @@
 error_reporting(0);
 include 'conn.php';
 include 'auth.php';
-
+//session_start();
+// if ($_SESSION['user']!=true) {
+//   header('location:../login.php');
+//   exit();
+//   // code...
+// }
 $a=8;
 ?>
 <!DOCTYPE html>

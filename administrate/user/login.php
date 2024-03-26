@@ -1,7 +1,7 @@
 <?php
 include('conn.php');
 include 'config/securite.php';
-session_start();
+
 
 
 

@@ -1,7 +1,11 @@
 <?php
 include 'conn.php';
 include 'auth.php';
-
+session_start();
+if ($_SESSION['type']!='user') {
+  header("location:../login.php");
+    exit();
+  }
 $a=4;
 ?>
 <!DOCTYPE html>

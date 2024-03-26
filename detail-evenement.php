@@ -1,7 +1,7 @@
 <?php
 
     error_reporting(0);
-    include "admin/conn.php";
+    include "administrate/admin/conn.php";
 
     //fet id
     $id = $_GET['id'];
@@ -31,6 +31,7 @@
 <head>
     <meta charset="utf-8">
     <title>Startup - Alpha-Romeo</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -47,7 +48,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
-    <<!-- link href="css/all.min.css" rel="stylesheet"> -->
+    <!-- link href="css/all.min.css" rel="stylesheet"> -->
 
     <!-- Libraries Stylesheet -->
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
@@ -153,7 +154,7 @@
                 <div class="col-lg-8">
                     <!-- Blog Detail Start -->
                     <div class="mb-5">
-                        <img class="img-fluid w-100 rounded mb-5" src="admin/images/evennement/<?php echo $fetch['img'];  ?>" alt="">
+                        <img class="img-fluid w-100 rounded mb-5" src="administrate/admin/images/evennement/<?php echo $fetch['img'];  ?>" alt="">
                         <h1 class="mb-4"><?php echo $fetch['title']; ?></h1>
                         <b><p><?php echo $fetch['descrip']; ?></p></b>
                     </div>
@@ -207,7 +208,7 @@
                             
                             ?>
                         <div class="d-flex rounded overflow-hidden mb-3">
-                            <img class="img-fluid" src="admin/images/evennement/<?php echo $row['img']; ?>" style="width: 100px; height: 100px; object-fit: cover;" alt="">
+                            <img class="img-fluid" src="administrate/admin/images/evennement/<?php echo $row['img']; ?>" style="width: 100px; height: 100px; object-fit: cover;" alt="">
                             <a href="detail-evenement.php?id=<?php echo $row['id']; ?>" class="h5 fw-semi-bold d-flex align-items-center bg-light px-3 mb-0"><?php echo $row['title']; ?>
                             </a>
                         </div>
@@ -220,7 +221,7 @@
     
                     <!-- Image Start -->
                     <div class="mb-5 wow slideInUp" data-wow-delay="0.1s">
-                        <img src="admin/dist/img/alpharomeo.png" alt="" class="img-fluid rounded">
+                        <img src="administrate/admin/dist/img/alpharomeo.png" alt="" class="img-fluid rounded">
                     </div>
                     <!-- Image End -->
     

@@ -24,19 +24,12 @@
 <head>
     <meta charset="utf-8">
     <title>Startup - Alpha-Romeo</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
 
     <!-- Favicon -->
-    <link href="assets/css/bootstrap.css" rel="stylesheet">
-<link href="assets/css/style.css" rel="stylesheet">
-<!-- Responsive File -->
-<link href="assets/css/responsive.css" rel="stylesheet">
-<!-- Color File -->
-<link href="assets/css/color.css" rel="stylesheet">
-
-
     <link href="img/alpharomeo.png" rel="icon">
 
     <!-- Google Web Fonts -->
@@ -48,7 +41,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
-    <<!-- link href="css/all.min.css" rel="stylesheet"> -->
+    <!-- link href="css/all.min.css" rel="stylesheet"> -->
 
     <!-- Libraries Stylesheet -->
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
@@ -70,7 +63,7 @@
 
 
     <!-- Topbar Start -->
-    <?php include 'header.php'; ?>
+    <?php include('header.php'); ?>
     <!-- Topbar End -->
 
 
@@ -209,7 +202,7 @@
                 <div class="col-lg-4 wow slideInUp" data-wow-delay="0.3s ">
                     <div class="team-item bg-light rounded overflow-hidden">
                         <div class="team-img position-relative overflow-hidden" >
-                            <img class="img-fluid w-100" src="admin/images/team/<?php echo $row['img'];?>"  alt="">
+                            <img class="img-fluid w-100" src="administrate/admin/images/team/<?php echo $row['img'];?>"  alt="">
                             <div class="team-social">
                                 <!-- <a class="btn btn-lg btn-primary btn-lg-square rounded" href=""><i class="fab fa-twitter fw-normal"></i></a> -->
                                 <a class="btn btn-lg btn-primary btn-lg-square rounded" href="<?php echo($row['fb']); ?>"><i class="fab fa-facebook-f fw-normal"></i></a>
